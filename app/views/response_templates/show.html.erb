@@ -1,0 +1,96 @@
+<h1>
+  Response #<%= @the_response.id %> details
+</h1>
+
+<article>
+  <div>
+    <a href="/responses">
+      Go back
+    </a>
+  </div>
+
+  <div>
+    <a href="/delete_response/<%= @the_response.id %>">
+      Delete response
+    </a>
+  </div>
+  <dl>
+    <dt>
+      User
+    </dt>
+    <dd>
+      <%= @the_response.user_id %>
+    </dd>
+
+    <dt>
+      Question
+    </dt>
+    <dd>
+      <%= @the_response.question_id %>
+    </dd>
+
+    <dt>
+      Correct result
+    </dt>
+    <dd>
+      <%= @the_response.correct_result %>
+    </dd>
+
+    <dt>
+      Created at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_response.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_response.updated_at) %> ago
+    </dd>
+  </dl>
+</article>
+
+<hr>
+
+
+<article>
+  <header>
+    <h2>
+      Edit response
+    </h2>
+  </header>
+
+  <form action="/modify_response/<%= @the_response.id %>"  method="post" >
+    <div>
+      <label for="user_id_box">
+        User
+      </label>
+
+      <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_response.user_id %>">
+    </div>
+
+    <div>
+      <label for="question_id_box">
+        Question
+      </label>
+
+      <input type="text" id="question_id_box" name="query_question_id" value="<%= @the_response.question_id %>">
+    </div>
+
+    <div>
+      <label for="correct_result_box">
+        Correct result
+      </label>
+
+      <input type="text" id="correct_result_box" name="query_correct_result" value="<%= @the_response.correct_result %>">
+    </div>
+
+    <button type="submit">
+      Update response
+    </button>
+  </form>
+</article>
+
+<hr>

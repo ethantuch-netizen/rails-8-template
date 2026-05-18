@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+  # Routes for the Response resource:
+
+  # CREATE
+  post("/insert_response", { :controller => "responses", :action => "create" })
+
+  # READ
+  get("/responses", { :controller => "responses", :action => "index" })
+
+  get("/responses/:path_id", { :controller => "responses", :action => "show" })
+
+  # UPDATE
+
+  post("/modify_response/:path_id", { :controller => "responses", :action => "update" })
+
+  # DELETE
+  get("/delete_response/:path_id", { :controller => "responses", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Question resource:
 
   # CREATE
