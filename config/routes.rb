@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   post("/insert_response", { :controller => "responses", :action => "create" })
 
   # READ
-  get("/responses", { :controller => "responses", :action => "index" })
+  #get("/responses", { :controller => "responses", :action => "index" })
+  root "responses#index"
 
   get("/responses/:path_id", { :controller => "responses", :action => "show" })
 
