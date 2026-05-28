@@ -57,4 +57,5 @@ class QuestionsController < ApplicationController
 
     redirect_to("/questions", { :notice => "Question deleted successfully." } )
   end
+
 end
