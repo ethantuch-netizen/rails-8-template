@@ -1,0 +1,28 @@
+.quiz-layout {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.quiz-box {
+  flex: 1;
+  min-height: 300px;
+  border: 1px solid #cccccc;
+  padding: 24px;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+}
+
+.quiz-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.quiz-buttons form {
+  margin: 0;
+}
+
+.quiz-buttons button {
+  padding: 12px 24px;
+  font-size: 16px;
+}

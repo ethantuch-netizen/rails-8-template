@@ -1,7 +1,18 @@
 class ResponsesController < ApplicationController
   
   def flashcards
+    matching_questions = Question.where({ :id => 1 })
+    @the_question = matching_questions.at(0)
+    
     render({ :template => "response_templates/flashcards" })
+  end
+
+  def mark_correct
+    redirect_to("/start_quiz")
+  end
+
+  def mark_incorrect
+    redirect_to("/start_quiz")
   end
   
   def index

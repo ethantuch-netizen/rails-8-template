@@ -1,1 +1,31 @@
-<h1> test </h1>
+<h1>
+  Your Flashcards
+</h1>
+
+<hr>
+
+<article>
+  <div class="quiz-layout">
+    <div class="quiz-box">
+      <h4>Question</h4>
+      <p><%= @the_question.content %></p>
+    </div>
+
+    <div class="quiz-box">
+      <h4>Answer</h4>
+      <p><%= @the_question.content_answer %></p>
+    </div>
+  </div>
+
+  <div class="quiz-buttons">
+    <form action="/mark_correct" method="post">
+      <input type="hidden" name="question_id" value="<%= @the_question.id %>">
+      <button>Correct</button>
+    </form>
+
+    <form action="/mark_incorrect" method="post">
+      <input type="hidden" name="question_id" value="<%= @the_question.id %>">
+      <button>Incorrect</button>
+    </form>
+  </div>
+</article>
