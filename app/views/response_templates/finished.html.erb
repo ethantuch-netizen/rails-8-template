@@ -1,9 +1,44 @@
-<div class="quiz-box">
-  <h4>Quiz complete</h4>
+<h1>
+  Quiz complete
+</h1>
 
-  <p>You have finished this quiz.</p>
+<hr>
+
+<article>
+  <header>
+    <h2>
+      Flashcard results
+    </h2>
+  </header>
+
+  <table>
+    <tr>
+      <th>Section</th>
+      <th>Question</th>
+      <th>Result</th>
+    </tr>
+
+    <% @quiz_summary_rows.each do |a_row| %>
+      <% the_question = a_row.fetch("question") %>
+      <% the_response = a_row.fetch("response") %>
+
+      <tr>
+        <td><%= the_question.gmat_section %></td>
+        <td><%= the_question.content %></td>
+        <td>
+          <% if the_response.nil? %>
+            No response
+          <% elsif the_response.correct_result == true %>
+            <span class="text-success">Correct</span>
+          <% else %>
+            <span class="text-danger">Incorrect</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 
   <p>
-    <a href="/start_quiz?current_index=0">Start again</a>
+    <a href="/start_quiz?current_index=0">Start quiz again</a>
   </p>
-</div>
+</article>

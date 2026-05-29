@@ -11,6 +11,27 @@ class ResponsesController < ApplicationController
     current_question_id = quiz_question_ids.at(current_index)
 
     if current_question_id.nil?
+      @quiz_summary_rows = []
+
+      quiz_question_ids.each do |a_question_id|
+        matching_questions = Question.where({ :id => a_question_id })
+        the_question = matching_questions.at(0)
+
+        matching_responses = Response.where({
+          :user_id => current_user.id,
+          :question_id => a_question_id
+        }).order({ :id => :desc })
+
+        the_response = matching_responses.at(0)
+
+        row_data = {
+          "question" => the_question,
+          "response" => the_response
+        }
+
+        @quiz_summary_rows.push(row_data)
+      end
+
       render({ :template => "response_templates/finished" })
     else
       matching_questions = Question.where({ :id => current_question_id })
