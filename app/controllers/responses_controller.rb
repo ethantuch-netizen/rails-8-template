@@ -15,6 +15,11 @@ class ResponsesController < ApplicationController
     redirect_to("/start_quiz?current_index=0")
   end
   
+  def audio
+    render({ :template => "response_templates/audio" })
+  end
+
+
   def flashcards
     #matching_questions = Question.where({ :id => 1 })
     #@the_question = matching_questions.at(0)

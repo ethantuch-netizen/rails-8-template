@@ -48,4 +48,6 @@ Rails.application.routes.draw do
   post("/start_quiz", { :controller => "responses", :action => "begin" })
   post("/mark_correct", { :controller => "responses", :action => "mark_correct" })
   post("/mark_incorrect", { :controller => "responses", :action => "mark_incorrect" })
+  
+  get("/start_audio", {:controller => "responses", :action => "audio"})
 end
