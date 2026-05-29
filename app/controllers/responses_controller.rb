@@ -1,10 +1,24 @@
 class ResponsesController < ApplicationController
   
   def flashcards
-    matching_questions = Question.where({ :id => 1 })
-    @the_question = matching_questions.at(0)
-    
-    render({ :template => "response_templates/flashcards" })
+    #matching_questions = Question.where({ :id => 1 })
+    #@the_question = matching_questions.at(0)
+    #render({ :template => "response_templates/flashcards" })
+
+    quiz_question_ids = [1, 2, 3, 4]
+    current_index = params.fetch("current_index", "0").to_i
+
+    current_question_id = quiz_question_ids.at(current_index)
+
+    if current_question_id.nil?
+      render({ :template => "quiz_templates/finished" })
+    else
+      matching_questions = Question.where({ :id => current_question_id })
+      @the_question = matching_questions.at(0)
+      @current_index = current_index
+
+      render({ :template => "response_templates/flashcards" })
+    end
   end
 
   def mark_correct
@@ -14,7 +28,9 @@ class ResponsesController < ApplicationController
     the_response.correct_result = true
     the_response.save
 
-    redirect_to("/start_quiz")
+    next_index = params.fetch("current_index").to_i + 1
+
+    redirect_to("/start_quiz?current_index=#{next_index}")
   end
 
   def mark_incorrect
@@ -24,7 +40,9 @@ class ResponsesController < ApplicationController
     the_response.correct_result = false
     the_response.save
 
-    redirect_to("/start_quiz")
+    next_index = params.fetch("current_index").to_i + 1
+
+    redirect_to("/start_quiz?current_index=#{next_index}")
   end
   
   def index

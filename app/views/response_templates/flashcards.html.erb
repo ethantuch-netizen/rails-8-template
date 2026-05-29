@@ -20,11 +20,13 @@
   <div class="quiz-buttons">
     <form action="/mark_correct" method="post">
       <input type="hidden" name="question_id" value="<%= @the_question.id %>">
+      <input type="hidden" name="current_index" value="<%= @current_index %>">
       <button>Correct</button>
     </form>
 
     <form action="/mark_incorrect" method="post">
       <input type="hidden" name="question_id" value="<%= @the_question.id %>">
+      <input type="hidden" name="current_index" value="<%= @current_index %>">
       <button>Incorrect</button>
     </form>
   </div>
