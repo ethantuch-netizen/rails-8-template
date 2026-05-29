@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   get("/", { :controller => "questions", :action => "home" })
   
   get("/start_quiz", { :controller => "responses", :action => "flashcards" })
-  post("/start_quiz", { :controller => "responses", :action => "begin" })
+  post("/build_study_set", { :controller => "responses", :action => "build_study_set" })
   post("/mark_correct", { :controller => "responses", :action => "mark_correct" })
   post("/mark_incorrect", { :controller => "responses", :action => "mark_incorrect" })
   

@@ -1,6 +1,5 @@
 class ResponsesController < ApplicationController
-  
-  def begin
+  def build_study_set
     selected_question_ids = []
 
     params.each do |a_key, a_value|
@@ -10,22 +9,27 @@ class ResponsesController < ApplicationController
       end
     end
 
-    session.store("quiz_question_ids", selected_question_ids)
+    session.store("selected_question_ids", selected_question_ids)
 
-    redirect_to("/start_quiz?current_index=0")
+    chosen_destination = params.fetch("destination")
+
+    if chosen_destination == "quiz"
+      redirect_to("/start_quiz?current_index=0")
+    else
+      redirect_to("/start_audio")
+    end
   end
-  
+
   def audio
     render({ :template => "response_templates/audio" })
   end
-
 
   def flashcards
     #matching_questions = Question.where({ :id => 1 })
     #@the_question = matching_questions.at(0)
     #render({ :template => "response_templates/flashcards" })
 
-    quiz_question_ids = session.fetch("quiz_question_ids", [])
+    quiz_question_ids = session.fetch("selected_question_ids", [])
     current_index = params.fetch("current_index", "0").to_i
 
     current_question_id = quiz_question_ids.at(current_index)
@@ -39,14 +43,14 @@ class ResponsesController < ApplicationController
 
         matching_responses = Response.where({
           :user_id => current_user.id,
-          :question_id => a_question_id
+          :question_id => a_question_id,
         }).order({ :id => :desc })
 
         the_response = matching_responses.at(0)
 
         row_data = {
           "question" => the_question,
-          "response" => the_response
+          "response" => the_response,
         }
 
         @quiz_summary_rows.push(row_data)
@@ -85,7 +89,7 @@ class ResponsesController < ApplicationController
 
     redirect_to("/start_quiz?current_index=#{next_index}")
   end
-  
+
   def index
     matching_responses = Response.all
 
@@ -128,7 +132,7 @@ class ResponsesController < ApplicationController
 
     if the_response.valid?
       the_response.save
-      redirect_to("/responses/#{the_response.id}", { :notice => "Response updated successfully." } )
+      redirect_to("/responses/#{the_response.id}", { :notice => "Response updated successfully." })
     else
       redirect_to("/responses/#{the_response.id}", { :alert => the_response.errors.full_messages.to_sentence })
     end
@@ -140,6 +144,6 @@ class ResponsesController < ApplicationController
 
     the_response.destroy
 
-    redirect_to("/responses", { :notice => "Response deleted successfully." } )
+    redirect_to("/responses", { :notice => "Response deleted successfully." })
   end
 end
