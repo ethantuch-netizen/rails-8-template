@@ -7,15 +7,53 @@
 <article>
   <header>
     <h2>
-      Test one audio file
+      Play two audio files in sequence
     </h2>
   </header>
 
   <p>
-    If the file path is correct, you should be able to press play below.
+    Press the button once to play both audio files back to back.
   </p>
 
-  <audio controls>
-    <source src="/audio/Q1.m4a" type="audio/mp4">
-  </audio>
+  <button id="play_sequence_button">Play audio sequence</button>
+
+  <p id="audio_status"></p>
 </article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var playButton = document.getElementById("play_sequence_button")
+    var statusText = document.getElementById("audio_status")
+    var player = new Audio()
+
+    var audioFiles = [
+      "/audio/Q1.m4a",
+      "/audio/Q2.m4a"
+    ]
+
+    var currentIndex = 0
+
+    function playCurrentAudio() {
+      if (currentIndex >= audioFiles.length) {
+        statusText.textContent = "Finished playing both files."
+        playButton.disabled = false
+        return
+      }
+
+      player.src = audioFiles[currentIndex]
+      statusText.textContent = "Now playing file " + (currentIndex + 1)
+      player.play()
+    }
+
+    player.addEventListener("ended", function() {
+      currentIndex = currentIndex + 1
+      playCurrentAudio()
+    })
+
+    playButton.addEventListener("click", function() {
+      currentIndex = 0
+      playButton.disabled = true
+      playCurrentAudio()
+    })
+  })
+</script>
