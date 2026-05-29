@@ -13,6 +13,14 @@
   background-color: #f8f8f8;
 }
 
+.answer-box .hover-answer {
+  color: transparent !important;
+}
+
+.answer-box:hover .hover-answer {
+  color: #000000 !important;
+}
+
 .quiz-buttons {
   display: flex;
   gap: 16px;

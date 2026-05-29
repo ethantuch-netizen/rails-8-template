@@ -11,10 +11,11 @@
       <p><%= @the_question.content %></p>
     </div>
 
-    <div class="quiz-box">
-      <h4>Answer</h4>
-      <p><%= @the_question.content_answer %></p>
+    <div class="quiz-box answer-box">
+      <h4>Answer (Hover to Reveal)</h4>
+      <p class="hover-answer"><%= @the_question.content_answer %></p>
     </div>
+
   </div>
 
   <div class="quiz-buttons">
