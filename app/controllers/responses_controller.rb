@@ -8,10 +8,22 @@ class ResponsesController < ApplicationController
   end
 
   def mark_correct
+    the_response = Response.new
+    the_response.user_id = current_user.id
+    the_response.question_id = params.fetch("question_id")
+    the_response.correct_result = true
+    the_response.save
+
     redirect_to("/start_quiz")
   end
 
   def mark_incorrect
+    the_response = Response.new
+    the_response.user_id = current_user.id
+    the_response.question_id = params.fetch("question_id")
+    the_response.correct_result = false
+    the_response.save
+
     redirect_to("/start_quiz")
   end
   
