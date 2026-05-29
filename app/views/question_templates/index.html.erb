@@ -4,7 +4,6 @@
 
 <hr>
 
-
 <article>
   <header>
     <h2>
@@ -19,21 +18,19 @@
         <th>Section</th>
         <th>Question</th>
       </tr>
-        
+
       <% @list_of_questions.each do |a_question| %>
-      <tr>
-        <td><input type="checkbox" name="use_question_<%= a_question.id %>" value="yes"></td>
-        <td><%= a_question.gmat_section %></td>
-        <td><%= a_question.content %></td>
-      </tr>
+        <tr>
+          <td><input type="checkbox" name="use_question_<%= a_question.id %>" value="yes"></td>
+          <td><%= a_question.gmat_section %></td>
+          <td><%= a_question.content %></td>
+        </tr>
       <% end %>
     </table>
 
-  <button name="destination" value="quiz">Start Flashcards</button>
-  <button name="destination" value="audio">Start Audio Flashcards</button>
-</form>
-
-</form>
+    <button name="destination" value="quiz">Start Flashcards</button>
+    <button name="destination" value="audio">Start Audio Flashcards</button>
+  </form>
 </article>
 
 # below text is from generator

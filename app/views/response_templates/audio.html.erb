@@ -20,15 +20,31 @@
   <p id="audio_status"></p>
 </article>
 
-<p>
-  Selected audio files:
-</p>
+<article>
+  <header>
+    <h2>
+      Questions player over audio
+    </h2>
+  </header>
 
-<ul>
-  <% @selected_questions.each do |a_question| %>
-    <li><%= a_question.audio_content_and_answer %></li>
-  <% end %>
-</ul>
+  <form method="get">
+    <table>
+      <tr>
+        <th>Question Number</th>
+        <th>Section</th>
+        <th>Question</th>
+      </tr>
+
+      <% @selected_questions.each do |a_question| %>
+        <tr>
+          <td><%= a_question.id %></td>
+          <td><%= a_question.gmat_section %></td>
+          <td><%= a_question.content %></td>
+        </tr>
+      <% end %>
+    </table>
+  </form>
+</article>
 
 
 <script>
