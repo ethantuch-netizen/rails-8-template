@@ -1,5 +1,5 @@
 <h1>
-  Audio test
+  Audio Flashcards
 </h1>
 
 <hr>
@@ -7,18 +7,29 @@
 <article>
   <header>
     <h2>
-      Play two audio files in sequence
+      Play selected audio files
     </h2>
   </header>
 
   <p>
-    Press the button once to play both audio files back to back.
+    Click once to play the selected audio files back to back.
   </p>
 
-  <button id="play_sequence_button">Play audio sequence</button>
+  <button id="play_sequence_button">Play selected audio</button>
 
   <p id="audio_status"></p>
 </article>
+
+<p>
+  Selected audio files:
+</p>
+
+<ul>
+  <% @selected_questions.each do |a_question| %>
+    <li><%= a_question.audio_content_and_answer %></li>
+  <% end %>
+</ul>
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -27,21 +38,24 @@
     var player = new Audio()
 
     var audioFiles = [
-      "/audio/Q1.m4a",
-      "/audio/Q2.m4a"
+      <% @selected_questions.each_with_index do |a_question, index| %>
+        "<%= a_question.audio_content_and_answer %>"<%= "," unless index == @selected_questions.length - 1 %>
+      <% end %>
     ]
+
+    console.log(audioFiles)
 
     var currentIndex = 0
 
     function playCurrentAudio() {
       if (currentIndex >= audioFiles.length) {
-        statusText.textContent = "Finished playing both files."
+        statusText.textContent = "Finished playing all selected audio files."
         playButton.disabled = false
         return
       }
 
       player.src = audioFiles[currentIndex]
-      statusText.textContent = "Now playing file " + (currentIndex + 1)
+      statusText.textContent = "Now playing: " + audioFiles[currentIndex]
       player.play()
     }
 
@@ -51,6 +65,11 @@
     })
 
     playButton.addEventListener("click", function() {
+      if (audioFiles.length === 0) {
+        statusText.textContent = "No audio files were selected."
+        return
+      }
+
       currentIndex = 0
       playButton.disabled = true
       playCurrentAudio()

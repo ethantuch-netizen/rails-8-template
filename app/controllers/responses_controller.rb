@@ -21,6 +21,10 @@ class ResponsesController < ApplicationController
   end
 
   def audio
+    selected_question_ids = session.fetch("selected_question_ids", [])
+
+    @selected_questions = Question.where({ :id => selected_question_ids }).order({ :id => :asc })
+    
     render({ :template => "response_templates/audio" })
   end
 
