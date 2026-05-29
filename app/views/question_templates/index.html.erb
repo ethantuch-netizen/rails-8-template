@@ -22,7 +22,7 @@
         
       <% @list_of_questions.each do |a_question| %>
       <tr>
-        <td><input type="checkbox" name="question_ids" value="<%= a_question.id %>"></td>
+        <td><input type="checkbox" name="use_question_<%= a_question.id %>" value="yes"></td>
         <td><%= a_question.gmat_section %></td>
         <td><%= a_question.content %></td>
       </tr>

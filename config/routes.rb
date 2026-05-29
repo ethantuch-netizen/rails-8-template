@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   # get("/your_first_screen", { :controller => "pages", :action => "first" })
 
   get("/start_quiz", { :controller => "responses", :action => "flashcards" })
+  post("/start_quiz", { :controller => "responses", :action => "begin" })
   post("/mark_correct", { :controller => "responses", :action => "mark_correct" })
   post("/mark_incorrect", { :controller => "responses", :action => "mark_incorrect" })
 end

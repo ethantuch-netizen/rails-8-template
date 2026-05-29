@@ -1,11 +1,26 @@
 class ResponsesController < ApplicationController
   
+  def begin
+    selected_question_ids = []
+
+    params.each do |a_key, a_value|
+      if a_key.start_with?("use_question_") && a_value == "yes"
+        question_id = a_key.delete_prefix("use_question_").to_i
+        selected_question_ids.push(question_id)
+      end
+    end
+
+    session.store("quiz_question_ids", selected_question_ids)
+
+    redirect_to("/start_quiz?current_index=0")
+  end
+  
   def flashcards
     #matching_questions = Question.where({ :id => 1 })
     #@the_question = matching_questions.at(0)
     #render({ :template => "response_templates/flashcards" })
 
-    quiz_question_ids = [1, 2, 3, 4]
+    quiz_question_ids = session.fetch("quiz_question_ids", [])
     current_index = params.fetch("current_index", "0").to_i
 
     current_question_id = quiz_question_ids.at(current_index)
