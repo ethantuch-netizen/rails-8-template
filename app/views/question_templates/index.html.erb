@@ -22,9 +22,7 @@
         
       <% @list_of_questions.each do |a_question| %>
       <tr>
-        <td>
-          <input type="checkbox" name="question_ids" value="<%= a_question.id %>">
-        </td>
+        <td><input type="checkbox" name="question_ids" value="<%= a_question.id %>"></td>
         <td><%= a_question.gmat_section %></td>
         <td><%= a_question.content %></td>
       </tr>
@@ -36,7 +34,7 @@
 </form>
 </article>
 
-# below text from generator
+# below text is from generator
 
 <article>
   <header>

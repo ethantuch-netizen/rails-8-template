@@ -1,4 +1,9 @@
 class ResponsesController < ApplicationController
+  
+  def flashcards
+    render({ :template => "response_templates/flashcards" })
+  end
+  
   def index
     matching_responses = Response.all
 
