@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   def index
     matching_questions = Question.all
 
-    @list_of_questions = matching_questions.order({ :created_at => :asc })
+    @list_of_questions = matching_questions.order({ :id => :asc })
 
     render({ :template => "question_templates/index" })
   end

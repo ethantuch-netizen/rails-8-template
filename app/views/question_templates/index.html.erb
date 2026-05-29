@@ -14,6 +14,7 @@
   <form action="/build_study_set" method="post">
     <table>
       <tr>
+        <th>#</th>
         <th>Include?</th>
         <th>Section</th>
         <th>Question</th>
@@ -21,6 +22,7 @@
 
       <% @list_of_questions.each do |a_question| %>
         <tr>
+          <td><%= a_question.id %></td>
           <td><input type="checkbox" name="use_question_<%= a_question.id %>" value="yes"></td>
           <td><%= a_question.gmat_section %></td>
           <td><%= a_question.content %></td>

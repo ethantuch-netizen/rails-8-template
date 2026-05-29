@@ -13,6 +13,7 @@
 
   <table>
     <tr>
+      <th>#</th>
       <th>Section</th>
       <th>Question</th>
       <th>Result</th>
@@ -23,6 +24,7 @@
       <% the_response = a_row.fetch("response") %>
 
       <tr>
+        <td><%= the_question.id %></td>
         <td><%= the_question.gmat_section %></td>
         <td><%= the_question.content %></td>
         <td>
