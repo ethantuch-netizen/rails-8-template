@@ -11,7 +11,7 @@ class ResponsesController < ApplicationController
     current_question_id = quiz_question_ids.at(current_index)
 
     if current_question_id.nil?
-      render({ :template => "quiz_templates/finished" })
+      render({ :template => "response_templates/finished" })
     else
       matching_questions = Question.where({ :id => current_question_id })
       @the_question = matching_questions.at(0)
